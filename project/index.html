@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <p>Type some text</p>
+    <input onkeyup="fkstHashConsole(this.value)" type="text" name="Type some text" value="">
+    <p id="input-text-result"></p>
+    <p>Upload file</p>
+    <input onchange="fkstHashFile(this.files[0])" type="file" accept=".txt" name="Type some text" value="">
+    <p id="input-file-read-result"></p>
+    <p id="hash-string"></p>
+
+    <script src="sha3_224.js" charset="utf-8"></script>
+    <script src="index.js" charset="utf-8"></script>
+</body>
+
+</html>
