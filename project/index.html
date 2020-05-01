@@ -7,23 +7,194 @@
 </head>
 
 <body>
-    <div class="main-container"></div>
-    <p>Type some text</p>
-    <input onkeyup="fkstHashConsole(this.value)" type="text" name="Type some text" value="">
-    <p id="input-text-result"></p>
-    <p>Upload file</p>
-    <input id="file-url-link" type="text" name="Type file url" value="">
-    <button id="hash-file-button">Hash File</button>
-    <p id="input-file-read-result"></p>
-    <p id="hash-string"></p>
+    <style media="screen">
+        body {
+            margin: 0;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            font-size: 14px;
 
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
+        }
+
+        button,
+        #qunit #qunit-tests a,
+        #qunit #qunit-filteredTest a {
+            background-color: #9e2a2a;
+            border-radius: 6px;
+            border: 1px solid #9e2a2a;
+            display: inline-block;
+            cursor: pointer;
+            color: #ececec;
+            padding: 6px 24px;
+            margin: 0 10px;
+        }
+
+        button:hover,
+        #qunit #qunit-tests a:hover,
+        #qunit #qunit-filteredTest a:hover {
+            background-color: #d93838;
+            color: white;
+        }
+
+        button:active {
+            position: relative;
+            color: white;
+            top: 1px;
+        }
+
+        p,
+        h2 {
+            color: #444;
+            font-size: 1.125rem;
+            font-weight: 300;
+            line-height: 30px;
+            margin: 0 0 0.5rem;
+        }
+
+        span,
+        li {
+            color: #444;
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        label {
+            color: #444;
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        input {
+            font-size: 1rem;
+            border: 1px solid #444;
+            color: #444;
+            border-radius: 5px;
+            padding: 0.2rem 0.625rem;
+            margin-top: 0;
+            font-weight: 300;
+        }
+
+        input::placeholder {
+            color: #444;
+        }
+
+        form {
+            padding: 1rem 0;
+        }
+
+        .navigation {
+            overflow: hidden;
+            background-color: #9e2a2a;
+
+        }
+
+        .navigation a {
+            float: left;
+            color: #ececec;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 1.125rem;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        .navigation span {
+            float: left;
+            color: #ececec;
+            text-align: center;
+            padding: 14px 16px;
+            font-weight: 300;
+            text-decoration: none;
+            font-size: 1.125rem;
+            cursor: default;
+        }
+
+        .navigation a:hover {
+            color: white;
+        }
+
+        .navigation a.active {
+            color: white;
+            font-weight: 500;
+        }
+
+        .functions-main-container,
+        .test-main-container {
+            padding: 1rem;
+        }
+
+        .test-name {
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: italic;
+            color: #9e2a2a;
+        }
+
+        .qunit-source {
+            color: #9e2a2a;
+            font-style: italic;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+    <div class="navigation">
+        <span class="title">SHA3_224</span>
+        <a class="active" id="run-tests-menu-item">Show Tests</a>
+        <a id="main-functions-menu-item">Main Functions</a>
+    </div>
+
+    <div class="functions-main-container hide">
+        <p>1.Type some text</p>
+        <input onkeyup="fkstHashConsole(this.value)" type="text" name="Type some text" value="">
+        <p id="input-text-result"></p>
+        <p>2.Type file url</p>
+        <input id="file-url-link" type="text" name="Type file url" value="">
+        <button id="hash-file-button">Hash File</button>
+        <p id="input-file-read-result"></p>
+        <p id="hash-string"></p>
+    </div>
+
+    <div class="test-main-container">
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+    </div>
 
     <script src="sha3_224.js" charset="utf-8"></script>
     <script src="index.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
     <script src="tests.js"></script>
+    <script type="text/javascript">
+        (function() {
+            document.getElementById('main-functions-menu-item').addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.add('active');
+                document.getElementById('run-tests-menu-item').classList.remove('active');
+                document.querySelector('.functions-main-container').classList.remove('hide');
+                document.querySelector('.test-main-container').classList.add('hide');
+            });
+
+            document.getElementById('run-tests-menu-item').addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.add('active');
+                document.getElementById('main-functions-menu-item').classList.remove('active');
+                document.querySelector('.functions-main-container').classList.add('hide');
+                document.querySelector('.test-main-container').classList.remove('hide');
+            });
+
+
+            document.getElementById('hash-string').innerHTML = `3.Hash from String: text to hash:<br> "abc" <br> sha3_224: <br>${fkstHashString()}`;
+            document.getElementById('hash-file-button').addEventListener('click', function() {
+                if (document.getElementById('file-url-link').value.length) {
+                    fkstHashFile(document.getElementById('file-url-link').value, true);
+                } else {
+                    alert('File url link is empty!');
+                }
+            });
+
+        }());
+    </script>
 </body>
 
 </html>

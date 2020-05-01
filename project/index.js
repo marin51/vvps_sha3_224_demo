@@ -47,10 +47,3 @@ var fkstHashFile = (function() {
         })
     };
 }());
-
-document.getElementById('hash-string').innerHTML = `Hash from String: text to hash:<br> "abc" <br> sha3_224: <br>${fkstHashString()}`;
-document.getElementById('hash-file-button').addEventListener('click', function() {
-    if (document.getElementById('file-url-link').value.length) {
-        fkstHashFile(document.getElementById('file-url-link').value, true);
-    }
-});
