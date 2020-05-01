@@ -7,16 +7,23 @@
 </head>
 
 <body>
+    <div class="main-container"></div>
     <p>Type some text</p>
     <input onkeyup="fkstHashConsole(this.value)" type="text" name="Type some text" value="">
     <p id="input-text-result"></p>
     <p>Upload file</p>
-    <input onchange="fkstHashFile(this.files[0])" type="file" accept=".txt" name="Type some text" value="">
+    <input id="file-url-link" type="text" name="Type file url" value="">
+    <button id="hash-file-button">Hash File</button>
     <p id="input-file-read-result"></p>
     <p id="hash-string"></p>
 
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
     <script src="sha3_224.js" charset="utf-8"></script>
     <script src="index.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="tests.js"></script>
 </body>
 
 </html>

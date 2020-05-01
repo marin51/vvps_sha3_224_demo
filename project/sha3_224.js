@@ -14,6 +14,8 @@ var sha3_224 = (function() {
         2147516545, 2147483648, 32896, 2147483648, 2147483649, 0, 2147516424, 2147483648
     ];
 
+    var instance = null;
+
 
     var createMethod = function() {
         return function(message) {
@@ -349,7 +351,10 @@ var sha3_224 = (function() {
 
 
     return {
-        getInc: function() { return methods.sha3_224; }
+        getInc: function() {
+            if (!instance) { instance = methods.sha3_224; }
+            return instance;
+        }
     };
 
 

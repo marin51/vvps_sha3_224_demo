@@ -22,20 +22,35 @@ var fkstHashString = (function() {
 
 var fkstHashFile = (function() {
     'use strict';
-    return function(file) {
-        var hash = sha3_224.getInc(),
-            reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function() {
-            document.getElementById('input-file-read-result').innerHTML = `plain text: <br> ${reader.result} <br>sha3_224: <br> ${hash(reader.result)}`;
-            return hash(reader.result);
 
-        };
-        reader.onerror = function() {
-            document.getElementById('input-file-read-result').innerText = reader.error;
-            return 'Error';
-        };
+
+    return function(fileUrl, showOnDisplay = false) {
+
+        return new Promise(function(resolve) {
+            if (fileUrl.endsWith('.txt')) {
+                fetch(fileUrl).then(function(file) {
+                    return file.text();
+                }).then(function(text) {
+                    var hash = sha3_224.getInc();
+                    if (text.length) {
+                        resolve(hash(text));
+                    } else {
+                        resolve('');
+                    }
+                    if (showOnDisplay) {
+                        document.getElementById('input-file-read-result').innerHTML = `plain text: <br> ${text} <br>sha3_224: <br> ${hash(text)}`;
+                    }
+                });
+            } else {
+                resolve("Wrong file format");
+            }
+        })
     };
 }());
 
 document.getElementById('hash-string').innerHTML = `Hash from String: text to hash:<br> "abc" <br> sha3_224: <br>${fkstHashString()}`;
+document.getElementById('hash-file-button').addEventListener('click', function() {
+    if (document.getElementById('file-url-link').value.length) {
+        fkstHashFile(document.getElementById('file-url-link').value, true);
+    }
+});
