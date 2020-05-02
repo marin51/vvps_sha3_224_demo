@@ -1,4 +1,4 @@
-var sha3_224 = (function() {
+const sha3_224 = (function() {
     'use strict';
 
     var INPUT_ERROR = 'input is invalid type';
@@ -351,7 +351,7 @@ var sha3_224 = (function() {
 
 
     return {
-        getInc: function() {
+        getInstance: function() {
             if (!instance) { instance = methods.sha3_224; }
             return instance;
         }
