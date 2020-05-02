@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "test": "nyc qunit"
+  },
+  "name": "vvps",
+  "version": "1.0.0",
+  "description": "university project",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "qunit": "^2.9.3"
+  },
+  "author": "Marin",
+  "license": "ISC"
+}
