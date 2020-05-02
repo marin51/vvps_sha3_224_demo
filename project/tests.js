@@ -50,7 +50,7 @@ var tests = (function() {
     function testAlgorithCollision() {
         var hash = sha3_224.getInstance(),
             result = '',
-            arrayForTest = [
+            testArray = [
                 hash('hello'),
                 hash('elloh'),
                 hash('oehll'),
